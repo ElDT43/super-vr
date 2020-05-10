@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="main.css">
+  <title>Super VR</title>
+  <meta name="description" content="Now in 3D!">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.6.0/aframe-master.min.js"></script>
+  <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js"></script>
+
+</head>
+<body>
+
+  <a-scene fog="type: linear; color: #000; far: 16; near: 7">
+
+    <!-- Splash Screen -->
+    <div class="splash">
+      <div class="splash__card">
+        <h1>Presentations in VR</h1>
+        <p>You can move around with WASD keys (desktop), by tapping the screen (mobile) or with the button on your Google Cardboard.</p>
+        <img class="splash__img" src="img/other/whoa.jpg" alt="whoa" />
+        <button class="splash__button">Enter</button>
+      </div>
+    </div>
+
+    <!-- Load Assets -->
+    <a-assets>
+      <!-- global -->
+      <img id="floor" src="img/other/floor.jpg">
+      <img id="wall" src="img/other/wall-concrete.jpg">
+
+      <img id="products" src="img/preview.jpg">
+
+    </a-assets>
+
+    <!-- User / Camera -->
+    <a-entity
+      id="player"
+      camera="user-height: 1.6"
+      universal-controls
+      kinematic-body
+      listener
+      position: "0 9 0"
+    >
+    <a-cursor color="red" />
+  </a-entity>
+
+
+    <!-- Start Room (spawn) -->
+    <a-entity position="1.5 1.5 -5" rotation="0 0 0">
+      <!--left wall -->
+      <a-entity rotation= "0 90 0">
+        <a-image position="1 1.5 -4.4" src="#products" height="3.5" width="5"></a-image>
+      </a-entity>
+    </a-entity>
+    <!-- Ground -->
+    <a-grid id="ground" static-body material="src: #floor; repeat: 15 15" rotation="0 -90 0"></a-grid>
+
+    <!-- Walls (used by map.js -->)
+    <a-entity id="walls"></a-entity>
+
+
+    <!-- Sky -->
+    <a-sky id="sky" color="#0000ff"></a-sky>
+
+  </a-scene>
+
+  <script src="js/map.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
